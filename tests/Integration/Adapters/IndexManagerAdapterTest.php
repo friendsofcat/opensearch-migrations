@@ -387,7 +387,7 @@ final class IndexManagerAdapterTest extends TestCase
         $this->indexManagerAdapter->connection($connection);
     }
 
-    public function prefixProvider(): array
+    public static function prefixProvider(): array
     {
         return [
             'no prefix' => [''],
