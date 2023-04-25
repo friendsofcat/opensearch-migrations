@@ -5,7 +5,7 @@ OpenSearch Migrations for Laravel allow you to easily modify and share indices s
 ## Contents
 
 * [Compatibility](#compatibility)
-* [Installation](#installation) 
+* [Installation](#installation)
 * [Configuration](#configuration)
 * [Writing Migrations](#writing-migrations)
 * [Running Migrations](#running-migrations)
@@ -20,7 +20,7 @@ OpenSearch Migrations for Laravel allow you to easily modify and share indices s
 The current version of OpenSearch Migrations has been tested with the following configuration:
 
 * PHP 7.4-8.0
-* OpenSearch 1.x
+* OpenSearch 2.x
 * Laravel 6.x-9.x
 
 ## Installation
@@ -90,7 +90,7 @@ You can effortlessly create a new migration file using an Artisan console comman
 // create a migration file with "create_my_index.php" name in the default directory
 php artisan opensearch:make:migration create_my_index
 
-// create a migration file with "create_my_index.php" name in "/my_path" directory 
+// create a migration file with "create_my_index.php" name in "/my_path" directory
 // note, that you need to specify the full path to the file in this case
 php artisan opensearch:make:migration /my_path/create_my_index.php
 ```
@@ -101,18 +101,18 @@ You can use `OpenSearch\Migrations\Facades\Index` facade to perform basic operat
 
 #### Create Index
 
-You can create an index with the default settings: 
+You can create an index with the default settings:
 
 ```php
 Index::create('my-index');
-``` 
+```
 
 You can use a modifier to configure mapping and settings:
 
 ```php
 Index::create('my-index', function (Mapping $mapping, Settings $settings) {
-    // to add a new field to the mapping use method name as a field type (in Camel Case), 
-    // first argument as a field name and optional second argument for additional field parameters  
+    // to add a new field to the mapping use method name as a field type (in Camel Case),
+    // first argument as a field name and optional second argument for additional field parameters
     $mapping->text('title', ['boost' => 2]);
     $mapping->float('price');
 
@@ -123,18 +123,18 @@ Index::create('my-index', function (Mapping $mapping, Settings $settings) {
             'type' => 'integer',
         ],
     ]);
-    
+
     // you can also change the index settings and the analysis configuration
     $settings->index([
          'number_of_replicas' => 2,
          'refresh_interval' => -1
     ]);
-    
+
     $settings->analysis([
         'analyzer' => [
             'title' => [
                 'type' => 'custom',
-                'tokenizer' => 'whitespace'    
+                'tokenizer' => 'whitespace'
             ]
         ]
     ]);
@@ -164,7 +164,7 @@ Finally, it is possible to create an index only if it doesn't exist:
 ```php
 // you can use a modifier as shown above
 Index::createIfNotExists('my-index', $modifier);
-// or you can use raw mapping and settings 
+// or you can use raw mapping and settings
 Index::createIfNotExistsRaw('my-index', $mapping, $settings);
 ```
 
@@ -190,8 +190,8 @@ Index::putMappingRaw('my-index', [
         ],
         'price' => [
             'price' => 'float'
-        ]      
-    ]   
+        ]
+    ]
 ]);
 ```
 
@@ -216,10 +216,10 @@ Index::putSettingsRaw('my-index', [
         'number_of_replicas' => 2,
         'refresh_interval' => -1
     ]
-]); 
+]);
 ```
 
-It is possible to update analysis settings only on closed indices. The `pushSettings` method closes the index, 
+It is possible to update analysis settings only on closed indices. The `pushSettings` method closes the index,
 updates the configuration and opens the index again:
 
 ```php
@@ -247,7 +247,7 @@ Index::pushSettingsRaw('my-index', [
             ]
         ]
     ]
-]); 
+]);
 ```
 
 #### Drop Index
@@ -347,7 +347,7 @@ php artisan opensearch:migrate:rollback /my_path/2018_12_01_081000_create_my_ind
 Use the `opensearch:migrate:reset` command if you want to revert all previously migrated files:
 
 ```bash
-php artisan opensearch:migrate:reset 
+php artisan opensearch:migrate:reset
 ```
 
 ## Starting Over
@@ -382,9 +382,9 @@ OpenSearch Migrations library doesn't include such feature out of the box, but y
 If you see one of the messages below, follow the instructions:
 
 * `Migration table is not yet created` - run the `php artisan migrate` command
-* `Migration directory is not yet created` - create a migration file using the `opensearch:make:migration` command or 
+* `Migration directory is not yet created` - create a migration file using the `opensearch:make:migration` command or
 create `migrations` directory manually
-  
+
 In case one of the commands doesn't work as expected, try to publish configuration:
 
 ```bash
