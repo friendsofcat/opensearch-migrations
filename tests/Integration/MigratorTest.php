@@ -56,10 +56,13 @@ final class MigratorTest extends TestCase
         $this->output
             ->expects($this->exactly(2))
             ->method('writeln')
-            ->withConsecutive(
-                ['<comment>Migrating:</comment> 2019_08_10_142230_update_test_index_mapping'],
-                ['<info>Migrated:</info> 2019_08_10_142230_update_test_index_mapping']
-            );
+            ->willReturnCallback(function ($output) {
+                match ($output) {
+                    '<comment>Migrating:</comment> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    '<info>Migrated:</info> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    default => $this->assertTrue(false),
+                };
+            });
 
         $this->assertSame(
             $this->migrator,
@@ -102,10 +105,13 @@ final class MigratorTest extends TestCase
         $this->output
             ->expects($this->exactly(2))
             ->method('writeln')
-            ->withConsecutive(
-                ['<comment>Migrating:</comment> 2019_08_10_142230_update_test_index_mapping'],
-                ['<info>Migrated:</info> 2019_08_10_142230_update_test_index_mapping']
-            );
+            ->willReturnCallback(function ($output) {
+                match ($output) {
+                    '<comment>Migrating:</comment> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    '<info>Migrated:</info> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    default => $this->assertTrue(false),
+                };
+            });
 
         $this->assertSame(
             $this->migrator,
@@ -151,10 +157,13 @@ final class MigratorTest extends TestCase
         $this->output
             ->expects($this->exactly(2))
             ->method('writeln')
-            ->withConsecutive(
-                ['<comment>Rolling back:</comment> 2018_12_01_081000_create_test_index'],
-                ['<info>Rolled back:</info> 2018_12_01_081000_create_test_index']
-            );
+            ->willReturnCallback(function ($output) {
+                match ($output) {
+                    '<comment>Rolling back:</comment> 2018_12_01_081000_create_test_index' => $this->assertTrue(true),
+                    '<info>Rolled back:</info> 2018_12_01_081000_create_test_index' => $this->assertTrue(true),
+                    default => $this->assertTrue(false),
+                };
+            });
 
         $this->assertSame(
             $this->migrator,
@@ -197,10 +206,13 @@ final class MigratorTest extends TestCase
         $this->output
             ->expects($this->exactly(2))
             ->method('writeln')
-            ->withConsecutive(
-                ['<comment>Rolling back:</comment> 2019_08_10_142230_update_test_index_mapping'],
-                ['<info>Rolled back:</info> 2019_08_10_142230_update_test_index_mapping']
-            );
+            ->willReturnCallback(function ($output) {
+                match ($output) {
+                    '<comment>Rolling back:</comment> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    '<info>Rolled back:</info> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    default => $this->assertTrue(false),
+                };
+            });
 
         $this->assertSame(
             $this->migrator,
@@ -245,12 +257,15 @@ final class MigratorTest extends TestCase
         $this->output
             ->expects($this->exactly(4))
             ->method('writeln')
-            ->withConsecutive(
-                ['<comment>Rolling back:</comment> 2019_08_10_142230_update_test_index_mapping'],
-                ['<info>Rolled back:</info> 2019_08_10_142230_update_test_index_mapping'],
-                ['<comment>Rolling back:</comment> 2018_12_01_081000_create_test_index'],
-                ['<info>Rolled back:</info> 2018_12_01_081000_create_test_index']
-            );
+            ->willReturnCallback(function ($output) {
+                match ($output) {
+                    '<comment>Rolling back:</comment> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    '<info>Rolled back:</info> 2019_08_10_142230_update_test_index_mapping' => $this->assertTrue(true),
+                    '<comment>Rolling back:</comment> 2018_12_01_081000_create_test_index' => $this->assertTrue(true),
+                    '<info>Rolled back:</info> 2018_12_01_081000_create_test_index' => $this->assertTrue(true),
+                    default => $this->assertTrue(false),
+                };
+            });
 
         $this->assertSame(
             $this->migrator,
