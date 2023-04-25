@@ -24,7 +24,7 @@ final class MigrationFactoryTest extends TestCase
         $this->migrationStorage = resolve(MigrationStorage::class);
     }
 
-    public function fileNameProvider(): array
+    public static function fileNameProvider(): array
     {
         return [
             ['2018_12_01_081000_create_test_index'],

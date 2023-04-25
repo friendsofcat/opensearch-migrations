@@ -21,7 +21,7 @@ final class MigrationStorageTest extends TestCase
         $this->migrationStorage->registerPaths([__DIR__ . '/../../migrations/archive']);
     }
 
-    public function newFileNameProvider(): array
+    public static function newFileNameProvider(): array
     {
         return [
             ['2022_06_01_223400_create_new_index'],
@@ -29,7 +29,7 @@ final class MigrationStorageTest extends TestCase
         ];
     }
 
-    public function existingFileNameProvider(): array
+    public static function existingFileNameProvider(): array
     {
         return [
             ['2018_12_01_081000_create_test_index'],
@@ -38,7 +38,7 @@ final class MigrationStorageTest extends TestCase
         ];
     }
 
-    public function nonExistingFileNameProvider(): array
+    public static function nonExistingFileNameProvider(): array
     {
         return [
             ['3030_01_01_000000_non_existing_file'],
